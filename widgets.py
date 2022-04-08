@@ -1,6 +1,28 @@
-from PySide6.QtWidgets import QApplication, QMainWindow, QPushButton, QLineEdit, QLabel, QVBoxLayout, QWidget, QComboBox, QListWidget, QSpinBox, QDoubleSpinBox, QSlider, QDial
+#!/usr/local/bin/python3
+#-*- coding: UTF-8 -*-
+
+from PySide6.QtWidgets import (
+    QApplication,
+    QMainWindow,
+    QPushButton,
+    QLineEdit,
+    QLabel,
+    QVBoxLayout,
+    QWidget,
+    QComboBox,
+    QListWidget,
+    QSpinBox,
+    QDoubleSpinBox,
+    QSlider,
+    QDial
+)
 from PySide6.QtCore import Qt
-from PySide6.QtGui import QPixmap
+from PySide6.QtGui import (
+    QPixmap,
+    QColor,
+    QPalette
+)
+
 # Only needed for access to command line arguments
 import sys
 
@@ -108,10 +130,18 @@ class MainWindow(QMainWindow):
         container = QWidget()
         container.setLayout(layout)
         
+        self.set_background_color("grey")
         
         self.windowTitleChanged.connect(self.the_window_title_was_changed)
         
         self.setCentralWidget(container)
+    
+    def set_background_color(self, color):
+        self.setAutoFillBackground(True)
+        
+        palette = self.palette()
+        palette.setColor(QPalette.Window, QColor(color))
+        self.setPalette(palette)
     
     def the_button_was_clicked(self):
         self.count += 1
